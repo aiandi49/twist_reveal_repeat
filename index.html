@@ -302,9 +302,45 @@
     body { font-size: 16px; }
     .hero { padding: 64px 18px 100px; }
   }
+  /* ---------- Shared series nav ---------- */
+  .series-nav{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; padding:14px clamp(18px,5vw,40px);
+    background:rgba(2,8,23,0.78); backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .series-nav .brand{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.16em;
+    text-transform:uppercase; color:var(--ink-soft); text-decoration:none; white-space:nowrap;
+  }
+  .series-nav .brand b{color:var(--teal);font-weight:500;}
+  .series-nav .links{display:flex; gap:6px; align-items:center;}
+  .series-nav .links a{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.04em;
+    text-decoration:none; color:var(--ink-faint); padding:7px 13px; border-radius:8px;
+    border:1px solid transparent; transition:color .2s, border-color .2s, background .2s;
+    white-space:nowrap;
+  }
+  .series-nav .links a:hover{color:var(--ink);border-color:var(--line);}
+  .series-nav .links a.current{
+    color:var(--teal-soft); border-color:rgba(0,229,204,0.4); background:rgba(0,229,204,0.08);
+  }
+  @media (max-width:560px){
+    .series-nav{flex-direction:column; gap:10px; align-items:flex-start;}
+    .series-nav .links{flex-wrap:wrap;}
+  }
 </style>
 </head>
 <body>
+
+<nav class="series-nav" aria-label="AI&amp;I × AXIS series">
+  <a class="brand" href="index.html">AI&amp;I <span style="opacity:.5">×</span> <b>AXIS</b></a>
+  <div class="links">
+    <a href="index.html" class="current" aria-current="page">Dailies</a>
+    <a href="reaction-series.html">Reaction Series</a>
+  </div>
+</nav>
 
 <div class="hero">
   <div class="hero-inner">

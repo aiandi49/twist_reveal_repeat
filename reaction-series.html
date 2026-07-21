@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Reaction Series · AI&amp;I × AXIS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#020817; --card:#0A1628; --card-tint:#0D1D33;
+    --ink:#E0F0FF; --ink-soft:#A0C4E0; --ink-faint:#6C8CAE;
+    --accent:#00AEFF; --accent-soft:#33C2FF; --teal:#00E5CC; --teal-soft:#4DF0DE;
+    --red:#FF3B5C; --orange:#FF9F1C; --blue:#3D7BFF;
+    --line:rgba(0,174,255,0.20);
+    --shadow-md:0 14px 44px rgba(0,174,255,0.16);
+    --shadow-lg:0 26px 76px rgba(0,229,204,0.16);
+    --grad-hero:linear-gradient(135deg,#020817 0%,#0A1628 35%,#00AEFF 78%,#00E5CC 100%);
+  }
+  *{box-sizing:border-box;}
+  ::selection{background:var(--teal-soft);color:#05141f;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;line-height:1.6;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  :focus-visible{outline:2px solid var(--teal-soft);outline-offset:3px;}
+  a{color:inherit;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;background:var(--grad-hero);
+    padding:120px 24px 180px;text-align:center;overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 42%,rgba(2,8,23,0.55),transparent 72%),
+      radial-gradient(ellipse 60% 50% at 50% 120%,rgba(2,8,23,0.9),transparent 70%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.28em;
+    text-transform:uppercase;color:rgba(224,240,255,0.85);font-weight:500;
+    display:inline-flex;align-items:center;gap:10px;margin:0 0 22px;
+  }
+  .eyebrow::before,.eyebrow::after{content:"";width:26px;height:1px;background:rgba(224,240,255,0.55);}
+  .hero h1{
+    font-family:'Fraunces',serif;font-weight:600;
+    font-size:clamp(2.6rem,8vw,5.4rem);line-height:0.98;
+    margin:0 auto;max-width:14ch;color:#F3FAFF;letter-spacing:-0.01em;
+    position:relative;z-index:2;text-shadow:0 2px 24px rgba(2,8,23,0.45);
+  }
+  .hero h1 em{font-style:italic;color:var(--teal-soft);}
+  .hero .sub{
+    position:relative;z-index:2;max-width:52ch;margin:26px auto 0;
+    font-size:clamp(1rem,2.4vw,1.22rem);color:rgba(224,240,255,0.92);font-weight:500;
+    text-shadow:0 1px 12px rgba(2,8,23,0.4);
+  }
+  /* the twist mark — a bottle that blooms on hover/load */
+  .twist-mark{
+    position:relative;z-index:2;width:64px;height:104px;margin:0 auto 30px;
+  }
+  .tm-bottle{
+    position:absolute;inset:0;border-radius:18px 18px 22px 22px;
+    border:2.5px solid rgba(224,240,255,0.7);overflow:hidden;background:rgba(255,255,255,0.10);
+  }
+  .tm-cap{position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+    width:30px;height:16px;background:rgba(224,240,255,0.7);border-radius:5px;}
+  .tm-fill{position:absolute;left:0;right:0;bottom:0;height:0%;
+    background:linear-gradient(0deg,var(--red),var(--orange) 50%,var(--blue));
+    animation:bloom 3.4s ease-in-out infinite;}
+  @keyframes bloom{0%,12%{height:0%}45%,70%{height:82%}92%,100%{height:0%}}
+  @media (prefers-reduced-motion:reduce){.tm-fill{animation:none;height:70%}}
+
+  /* ---------- Thesis card ---------- */
+  .thesis{
+    position:relative;z-index:5;max-width:680px;margin:-110px auto 0;
+    background:var(--card);border:1px solid var(--line);border-radius:22px;
+    box-shadow:var(--shadow-lg);padding:44px 46px 38px;
+  }
+  .thesis p{margin:0;font-size:19px;color:var(--ink-soft);}
+  .thesis p strong{color:var(--teal-soft);font-weight:600;}
+  .thesis .row{
+    display:flex;gap:14px;flex-wrap:wrap;margin-top:26px;padding-top:24px;
+    border-top:1px solid var(--line);
+  }
+  .metric{flex:1;min-width:130px;}
+  .metric .n{font-family:'Fraunces',serif;font-size:2rem;color:var(--ink);line-height:1;}
+  .metric .l{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;
+    text-transform:uppercase;color:var(--ink-faint);margin-top:8px;}
+
+  /* ---------- Section frame ---------- */
+  section.block{max-width:1080px;margin:0 auto;padding:70px 24px 0;}
+  .sec-eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;
+    text-transform:uppercase;color:var(--teal);display:inline-flex;align-items:center;gap:10px;
+    margin:0 0 12px;
+  }
+  .sec-eyebrow::before{content:"";width:22px;height:1px;background:var(--teal);}
+  h2.sec-title{
+    font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.7rem,4vw,2.5rem);
+    line-height:1.06;margin:0 0 14px;color:var(--ink);letter-spacing:-0.01em;
+  }
+  h2.sec-title em{font-style:italic;color:var(--teal-soft);}
+  .sec-lede{max-width:60ch;color:var(--ink-soft);font-size:1.05rem;margin:0 0 34px;}
+
+  /* ---------- 4-part engine ---------- */
+  .engine{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .step{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:24px 22px 26px;position:relative;overflow:hidden;
+  }
+  .step .k{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent-soft);
+    letter-spacing:0.1em;}
+  .step h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;margin:10px 0 8px;color:var(--ink);}
+  .step p{margin:0;font-size:0.92rem;color:var(--ink-faint);}
+
+  /* ---------- Reaction wall ---------- */
+  .wall{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;}
+  .clip{
+    position:relative;aspect-ratio:9/16;border-radius:12px;overflow:hidden;
+    background:var(--card-tint);border:1px solid var(--line);
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:12px;cursor:default;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+  }
+  .clip:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--accent);}
+  .clip::before{
+    content:"";position:absolute;inset:0;opacity:0.9;
+    background:radial-gradient(circle at 50% 32%,var(--glow) 0%,transparent 55%),
+      linear-gradient(180deg,rgba(2,8,23,0) 40%,rgba(2,8,23,0.92) 100%);
+  }
+  .clip .num{position:absolute;top:10px;left:12px;font-family:'JetBrains Mono',monospace;
+    font-size:11px;color:var(--ink);opacity:0.85;z-index:2;}
+  .clip .cap{position:absolute;top:9px;right:11px;width:14px;height:14px;border-radius:50%;
+    z-index:2;box-shadow:0 0 0 3px rgba(2,8,23,0.5);}
+  .clip .title{position:relative;z-index:2;font-family:'Fraunces',serif;font-weight:600;
+    font-size:0.98rem;color:var(--ink);line-height:1.15;}
+  .clip .beat{position:relative;z-index:2;font-size:0.72rem;color:var(--ink-soft);margin-top:3px;}
+  .cap-red{background:var(--red);} .cap-orange{background:var(--orange);} .cap-blue{background:var(--blue);}
+
+  /* ---------- Specs strip ---------- */
+  .specs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:8px;}
+  .spec{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;}
+  .spec .n{font-family:'Fraunces',serif;font-size:1.7rem;color:var(--teal-soft);line-height:1;}
+  .spec .l{font-size:0.82rem;color:var(--ink-faint);margin-top:8px;}
+
+  /* ---------- CTA ---------- */
+  .cta{
+    max-width:780px;margin:80px auto 0;padding:48px 40px;text-align:center;
+    background:linear-gradient(135deg,var(--card) 0%,var(--card-tint) 100%);
+    border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow-md);
+  }
+  .cta h2{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.5rem,4vw,2.1rem);margin:0 0 12px;}
+  .cta h2 em{font-style:italic;color:var(--teal-soft);}
+  .cta p{color:var(--ink-soft);max-width:48ch;margin:0 auto;}
+
+  footer{
+    text-align:center;padding:60px 24px 70px;color:var(--ink-faint);
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.1em;
+  }
+  footer .tag{color:var(--teal);}
+
+  @media (max-width:880px){
+    .engine{grid-template-columns:repeat(2,1fr);}
+    .wall{grid-template-columns:repeat(3,1fr);}
+    .specs{grid-template-columns:repeat(2,1fr);}
+    .thesis{padding:34px 26px 30px;margin-top:-90px;}
+  }
+  @media (max-width:520px){
+    .wall{grid-template-columns:repeat(2,1fr);}
+    .hero{padding:90px 20px 150px;}
+  }
+
+  /* ---------- Shared series nav ---------- */
+  .series-nav{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; padding:14px clamp(18px,5vw,40px);
+    background:rgba(2,8,23,0.78); backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .series-nav .brand{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.16em;
+    text-transform:uppercase; color:var(--ink-soft); text-decoration:none; white-space:nowrap;
+  }
+  .series-nav .brand b{color:var(--teal);font-weight:500;}
+  .series-nav .links{display:flex; gap:6px; align-items:center;}
+  .series-nav .links a{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.04em;
+    text-decoration:none; color:var(--ink-faint); padding:7px 13px; border-radius:8px;
+    border:1px solid transparent; transition:color .2s, border-color .2s, background .2s;
+    white-space:nowrap;
+  }
+  .series-nav .links a:hover{color:var(--ink);border-color:var(--line);}
+  .series-nav .links a.current{
+    color:var(--teal-soft); border-color:rgba(0,229,204,0.4); background:rgba(0,229,204,0.08);
+  }
+  @media (max-width:560px){
+    .series-nav{flex-direction:column; gap:10px; align-items:flex-start;}
+    .series-nav .links{flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="series-nav" aria-label="AI&amp;I × AXIS series">
+  <a class="brand" href="index.html">AI&amp;I <span style="opacity:.5">×</span> <b>AXIS</b></a>
+  <div class="links">
+    <a href="index.html">Dailies</a>
+    <a href="reaction-series.html" class="current" aria-current="page">Reaction Series</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="twist-mark" aria-hidden="true">
+    <span class="tm-cap"></span>
+    <span class="tm-bottle"><span class="tm-fill"></span></span>
+  </div>
+  <p class="eyebrow">AI&amp;I × AXIS · Series 01</p>
+  <h1>The <em>Reaction</em> Series</h1>
+  <p class="sub">One twist. One bloom of color. One real face doing all the selling — reproduced eighteen ways.</p>
+</header>
+
+<div class="thesis">
+  <p>AXIS went viral once, for free, on a single moment: <strong>twist the cap, the liquid blooms from clear to color, and a person's face does the rest.</strong> Not the product shot. Not the storefront. The reaction. This series turns that one moment into an engine — eighteen five-second clips, three bottles, one emotion.</p>
+  <div class="row">
+    <div class="metric"><div class="n">18</div><div class="l">Reaction clips</div></div>
+    <div class="metric"><div class="n">5s</div><div class="l">Each · not 15</div></div>
+    <div class="metric"><div class="n">3</div><div class="l">SKUs, one hook</div></div>
+    <div class="metric"><div class="n">9:16</div><div class="l">Native vertical</div></div>
+  </div>
+</div>
+
+<section class="block">
+  <p class="sec-eyebrow">The engine</p>
+  <h2 class="sec-title">Capture, generate, distribute, <em>convert</em></h2>
+  <p class="sec-lede">The reaction already worked in the wild. The only question was how to make more of it without paying more every time it does. Four parts answer that.</p>
+  <div class="engine">
+    <div class="step"><div class="k">01</div><h3>Capture</h3><p>Find the moment that already sells — the twist-cap color bloom and the face that meets it.</p></div>
+    <div class="step"><div class="k">02</div><h3>Generate</h3><p>Rebuild it cinematically at volume. One hook, eighteen bodies, three colors.</p></div>
+    <div class="step"><div class="k">03</div><h3>Distribute</h3><p>Same clip everywhere the audience already lives — TikTok, Reels, Shorts.</p></div>
+    <div class="step"><div class="k">04</div><h3>Convert</h3><p>The reaction is the proof. More of it means more shelf space, more direct sales.</p></div>
+  </div>
+</section>
+
+<section class="block">
+  <p class="sec-eyebrow">The wall · 18 clips</p>
+  <h2 class="sec-title">Eighteen faces, <em>one</em> feeling</h2>
+  <p class="sec-lede">Adults 18–40, broad range. One shared emotion — delight, the involuntary "oh my god the color" — in eighteen different bodies. Hover a clip to bring it forward.</p>
+  <div class="wall" id="wall"></div>
+</section>
+
+<section class="block">
+  <p class="sec-eyebrow">The spec</p>
+  <h2 class="sec-title">Built to <em>reproduce</em></h2>
+  <p class="sec-lede">Every clip is generated to the same settings so the wall reads as one series, not eighteen experiments.</p>
+  <div class="specs">
+    <div class="spec"><div class="n">5s</div><div class="l">Duration — one beat: twist, bloom, face. Cut on the peak.</div></div>
+    <div class="spec"><div class="n">9:16</div><div class="l">Vertical, 720p — native to the feeds this hook lives in.</div></div>
+    <div class="spec"><div class="n">~2oz</div><div class="l">True bottle scale — Janice's note, held on every take.</div></div>
+    <div class="spec"><div class="n">1×</div><div class="l">Re-roll budget on any clip where the color bloom misfires.</div></div>
+  </div>
+</section>
+
+<div class="cta">
+  <h2>Capture. Generate. Distribute. <em>Repeat.</em></h2>
+  <p>The reaction went viral once for free. This is how it happens on schedule — the same hook, reproduced at volume, for a price a single creator can match.</p>
+</div>
+
+<footer>
+  AI&amp;I × AXIS · <span class="tag">Twist. Reveal. Repeat until it's right.</span>
+</footer>
+
+<script>
+  const clips = [
+    {n:"01",cap:"red",title:"The Gasp",beat:"Wide eyes, sharp inhale",glow:"rgba(255,59,92,0.45)"},
+    {n:"02",cap:"red",title:"Double-Take Grin",beat:"Look away, snap back",glow:"rgba(255,59,92,0.4)"},
+    {n:"03",cap:"red",title:"Slow Bloom of Joy",beat:"Smile in slow motion",glow:"rgba(255,59,92,0.35)"},
+    {n:"04",cap:"red",title:"The Silent Wow",beat:"Head-shake disbelief",glow:"rgba(255,59,92,0.3)"},
+    {n:"05",cap:"red",title:"Hand-to-Chest",beat:"Laughing, eyes crinkle",glow:"rgba(255,59,92,0.42)"},
+    {n:"06",cap:"red",title:"The Lean-In",beat:"'No way,' delighted",glow:"rgba(255,59,92,0.38)"},
+    {n:"07",cap:"orange",title:"The Eyebrow Pop",beat:"'Ohhh,' happy nod",glow:"rgba(255,159,28,0.45)"},
+    {n:"08",cap:"orange",title:"The Belly Laugh",beat:"Surprised laugh",glow:"rgba(255,159,28,0.42)"},
+    {n:"09",cap:"orange",title:"Whispered No-Way",beat:"Slow delighted smile",glow:"rgba(255,159,28,0.35)"},
+    {n:"10",cap:"orange",title:"The Bright Snap",beat:"Neutral to grin, fast",glow:"rgba(255,159,28,0.4)"},
+    {n:"11",cap:"orange",title:"Quiet Awe-Smile",beat:"Eyes on the color",glow:"rgba(255,159,28,0.32)"},
+    {n:"12",cap:"orange",title:"Point-and-Beam",beat:"Shows it to camera",glow:"rgba(255,159,28,0.44)"},
+    {n:"13",cap:"blue",title:"Reverent Hush",beat:"Still, then 'whoa'",glow:"rgba(61,123,255,0.45)"},
+    {n:"14",cap:"blue",title:"Eyes-Wide Wow",beat:"Open-mouth 'wow'",glow:"rgba(61,123,255,0.42)"},
+    {n:"15",cap:"blue",title:"Slow Grin Build",beat:"Small, then unstoppable",glow:"rgba(61,123,255,0.35)"},
+    {n:"16",cap:"blue",title:"Gasp-Laugh",beat:"Gasp tips into laugh",glow:"rgba(61,123,255,0.4)"},
+    {n:"17",cap:"blue",title:"Head-Shake Smile",beat:"Disbelief to delight",glow:"rgba(61,123,255,0.33)"},
+    {n:"18",cap:"blue",title:"Show-the-Camera",beat:"Tilts it, 'look at this'",glow:"rgba(61,123,255,0.44)"},
+  ];
+  const wall = document.getElementById('wall');
+  clips.forEach(c=>{
+    const el=document.createElement('div');
+    el.className='clip';
+    el.style.setProperty('--glow',c.glow);
+    el.innerHTML=`<span class="num">${c.n}</span><span class="cap cap-${c.cap}"></span>
+      <div class="title">${c.title}</div><div class="beat">${c.beat}</div>`;
+    wall.appendChild(el);
+  });
+</script>
+
+</body>
+</html>
